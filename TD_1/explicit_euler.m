@@ -1,8 +1,8 @@
-function y=explicit_euler(y0,h,T,F)
+function y=explicit_euler(y0,dt,T,f)
 y=y0;
 yy=y0;
-N=floor(T/h);t=0;
+N=floor(T/dt);t=0;
 for i=1:N
-yy=yy+h*F(t,yy);
-y=[y,yy];t=t+h;
+yy=yy+dt*f(t,yy);
+y=[y,yy];t=t+dt;
 end
