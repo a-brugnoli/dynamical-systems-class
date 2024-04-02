@@ -12,7 +12,7 @@ error = zeros(n_dt, 1);
 
 for i=1:n_dt
     dt=dt_vec(i);
-    xx=cranck_nicholson(x0,dt,T, f, Df);
+    xx=runge_kutta_4(x0,dt,T, f);
     x_vec{i} = xx;
 
     error(i) = norm(y_ex_T - xx(end));
@@ -26,8 +26,8 @@ set(0, 'DefaultTextInterpreter', 'latex');
 % Create a semilog plot
 loglog(dt_vec, error, 'b');  % 'b' specifies blue color
 hold on;
-loglog(dt_vec, dt_vec.^2, 'r--')
-legend({'Error Cranck Nicholson', '$\Delta t^2$'}, 'Interpreter', 'latex');
+loglog(dt_vec, dt_vec.^4, 'r--')
+legend({'Error RungeKutta 4', '$\Delta t^4$'}, 'Interpreter', 'latex');
 % Add labels and title
 xlabel('$\Delta t$ (log scale)');
 ylabel('Error (log scale)');
@@ -47,6 +47,6 @@ set(gcf, 'PaperPositionMode', 'manual');
 set(gcf, 'PaperPosition', [0 0 6.25 7.5]);
 
 set(gcf, 'renderer', 'painters');
-print(gcf, '-dpdf', 'error_cranck_nicholson.pdf');
+print(gcf, '-dpdf', 'error_rk4.pdf');
 
   
